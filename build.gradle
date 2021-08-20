@@ -25,7 +25,7 @@ repositories {
 ext {
 	set('springCloudVersion', "Hoxton.SR6")
 	set('cucumberVersion', '6.6.0')
-	set('testContainersVersion', '1.14.3')
+	set('testContainersVersion', '1.16.0')
 	set('wireMockVersion', '2.27.2')
 }
 

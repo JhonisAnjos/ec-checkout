@@ -5,12 +5,12 @@ import dev.jhonis.ecommerce.checkout.event.CheckoutCreatedEvent;
 import dev.jhonis.ecommerce.checkout.repository.CheckoutRepository;
 import dev.jhonis.ecommerce.checkout.resource.checkout.CheckoutRequest;
 import dev.jhonis.ecommerce.checkout.streaming.CheckoutCreatedSource;
+import dev.jhonis.ecommerce.checkout.util.UUIDUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,13 +18,14 @@ public class CheckoutServiceImpl implements dev.jhonis.ecommerce.checkout.servic
 
     private final CheckoutRepository checkoutRepository;
     private final CheckoutCreatedSource checkoutCreatedSource;
+    private final UUIDUtil uuidUtil;
 
 
 
     @Override
     public Optional<CheckoutEntity> create(CheckoutRequest checkoutRequest) {
         final CheckoutEntity checkoutEntity = CheckoutEntity.builder()
-                .code(UUID.randomUUID().toString())
+                .code(uuidUtil.createUUID())
                 .status(CheckoutEntity.Status.CREATED)
                 .saveAddress(checkoutRequest.getSaveAddress())
                 .saveInformation(checkoutRequest.getSaveInfo())
